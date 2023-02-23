@@ -14,8 +14,11 @@ const entrance = makeRoom('You stand before an ancient doorway. Though the sun s
 const firstRoom = makeRoom('A dark room.', ['Knife']);
 const secondRoom = makeRoom('A dark room with an eerie green glow to what you believe is east.', [null]);
 export const world = [
-    entrance,
-    [firstRoom, secondRoom]
+    [{description: 'room 1'}, {description: 'room 2'}, {description: 'room 3'}],
+    [{description: 'room 4'}, {description: 'room 5'}, {description: 'room 6'}],
+    [{description: 'room 7'}, {description: 'room 8'}, {description: 'room 9'}]
+];
+export const map = [
 ];
 export const hero = {
     name: 'Pera',

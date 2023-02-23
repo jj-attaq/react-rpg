@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { hero, world } from './narrative.jsx';
+import { hero, world, map } from './narrative.jsx';
 
 const log = console.log;
 
-log(world, hero)
 export default function GameWindow() {
-    const [currentLocation, setLocation] = useState(world[0]);
+    const [currentLocation, setLocation] = useState(world[1][1]);
     const [currentText, setText] = useState(currentLocation.description);
+    log(currentText);
     return (
         <div className="game-window">
             <Narrative text={currentText}/>
@@ -31,19 +31,38 @@ function Button({value, onBtnClick, type}) {
     );
 }
 function Navigation({setText, currentLocation, setLocation}) {
+    /*
     const walkNorth = "You walk North.";
     const walkWest = "You walk West.";
     const walkEast = "You walk East.";
     const walkSouth = "You walk South.";
-    function handleMovement() {
-        setLocation(currentLocation = world[1][0])
-        setText(currentLocation.description)
+    */
+    function getCoordinates(arr, k) {
+      for (let i = 0; i < arr.length; i++) {
+        let index = arr[i].indexOf(k);
+        if (index > -1) {
+          return [i, index];
+        }
+      }
     }
     function handleKeyDown(e) {
+        /*
+        function handleMovement(e) {
+            setLocation(currentLocation = world[1][0]);
+            setText(currentLocation.description);
+        }
+        */
         if (e.key === 'ArrowUp') {
             log('key pressed: ' + e.key);
-            setText(walkNorth);
-            handleMovement()
+            let description = 'north';
+            // https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
+            setLocation((currentLocation, direction) => {
+                let start = getCoordinates(map, currentLocation);
+                if (direction === 'north') {
+                    return map[start[0] - 1][start[0]];
+                }
+            });
+            setText(currentLocation.description)
         }
         if (e.key === 'ArrowLeft') {
             log('key pressed: ' + e.key);
@@ -97,4 +116,21 @@ function Combat({setText}) {
             <Button value={"Attack"} type={"btn"} onBtnClick={() => setText("You attack!")}/>
         </div>
     );
+    /*
+        setLocation((currentLocation, direction) => {
+            let start = getCoordinates(map, currentLocation);
+            if (direction === 'north') {
+                return map[start[0] - 1][start[0]];
+            }
+            if (direction === 'west') {
+                return map[start[0]][start[0] - 1];
+            }
+            if (direction === 'east') {
+                return map[start[0]][start[0] + 1];
+            }
+            if (direction === 'south') {
+                return map[start[0] + 1][start[0]];
+            }
+        });
+    */
 }
