@@ -1,0 +1,65 @@
+.game-window {
+    @apply flex flex-col items-center;
+}
+.window {
+    @apply border-solid border-black border-2 m-4 p-2 w-3/4;
+}
+.narrative {
+    @apply text-justify h-64;
+}
+.dashboard {
+    @apply flex justify-around items-center;
+}
+.navigation {
+    @apply grid grid-cols-3 grid-rows-3;
+}
+.btn {
+    @apply cursor-pointer hover:bg-amber-200 shadow-inner border-solid border-black border-2 rounded-xl m-2 p-2;
+}
+.nav-btn {
+    @apply m-0;
+}
+/*
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
