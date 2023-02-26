@@ -1,8 +1,8 @@
 .game-window {
-    @apply flex flex-col items-center;
+    @apply flex flex-col items-center bg-stone-500 rounded-xl border-solid border-black border-2 m-2 p-4;
 }
 .window {
-    @apply border-solid border-black border-2 m-4 p-2 w-3/4;
+    @apply border-solid border-black border-2 m-4 p-2 w-3/4 bg-white;
 }
 .narrative {
     @apply text-justify h-64;
