@@ -18,8 +18,7 @@ export const world = [
     [{description: 'room 4'}, {description: 'room 5'}, {description: 'room 6'}],
     [{description: 'room 7'}, {description: 'room 8'}, {description: 'room 9'}]
 ];
-export const map = [
-];
+
 export const hero = {
     name: 'Pera',
     /*
