@@ -8,13 +8,21 @@ export default function GameWindow() {
     const [currentLocation, setLocation] = useState(world[1][1]);
     const [currentText, setText] = useState(currentLocation.description);
     // https://stackoverflow.com/questions/61569172/associate-a-state-with-another-state-in-usestate-hook
+    useEffect(() => { // currentText lags behind without this
+        if (currentText) { // non movement functions get instantly erased by current location without this conditional
+            return
+        } else {
+            setText(currentLocation.description)
+            log(currentLocation)
+        }
+    }, [() => currentLocation]);
     return (
         <div className="game-window">
-            <Narrative text={currentLocation.description}/>
+            <Narrative text={currentText}/>
             <div className="window dashboard">
                 <Navigation setText={setText} currentLocation={currentLocation} setLocation={setLocation} />
-                <Interaction setText={setText}/>
-                <Combat setText={setText}/>
+                <Interaction setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
+                <Combat setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
             </div>
             </div>
     );
@@ -31,40 +39,38 @@ function Button({value, onBtnClick, type}) {
         <button className={`${type}`} onClick={onBtnClick}>{value}</button>
     );
 }
-function Navigation({setText, currentLocation, setLocation}) {
+function Navigation({currentText, setText, currentLocation, setLocation}) {
     const walkNorth = "north";
     const walkWest = "west";
     const walkEast = "east";
     const walkSouth = "south";
+
     function handleMovement(direction) {
         const newLoc = move(currentLocation, direction);
         setLocation(newLoc);
-        setText(currentLocation.description);
+        setText(currentText);
     }
     function handleKeyDown(e) {
         if (e.key === 'ArrowUp') {
-            log('key pressed: ' + e.key);
+ //           log('key pressed: ' + e.key);
             handleMovement(walkNorth);
             // https://stackoverflow.com/questions/24943200/javascript-2d-array-indexof
         }
         if (e.key === 'ArrowLeft') {
-            log('key pressed: ' + e.key);
             handleMovement(walkWest);
         }
         if (e.key === 'ArrowRight') {
-            log('key pressed: ' + e.key);
             handleMovement(walkEast);
         }
         if (e.key === 'ArrowDown') {
-            log('key pressed: ' + e.key);
             handleMovement(walkSouth);
         }
     }
     useEffect(() => {
-        log(currentLocation);
+//        log(currentLocation);
         window.addEventListener('keydown', handleKeyDown)
         return () => { // this return is to clear the eventListener on mount
-            log('listener removed')
+//            log('listener removed')
             window.removeEventListener('keydown', handleKeyDown)
         }
     }, [() => setText]) // page won't load if it's not an arrow function, because setText is a change of state, not a state in itself
@@ -84,11 +90,11 @@ function Navigation({setText, currentLocation, setLocation}) {
         </>
     );
 }
-function Interaction({setText}) {
+function Interaction({setText, currentLocation}) {
     return (
         <>
         <div className="interaction">
-            <Button value={"Look"} type={"btn"} onBtnClick={() => setText("You look around.")}/>
+            <Button value={"Look"} type={"btn"} onBtnClick={() => setText('You are in ' + currentLocation.description)}/>
             <Button value={"Grab"} type={"btn"} onBtnClick={() => setText("You grab something.")}/>
         </div>
         </>

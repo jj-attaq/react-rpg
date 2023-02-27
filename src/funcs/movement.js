@@ -15,13 +15,13 @@ export default function move(currentLocation, direction) {
     const xAxis = start[1];
 
     if (direction === 'north') {
-        return yAxis === 0 ? currentLocation : world[yAxis - 1][xAxis];
+        return (yAxis <= 0) || (world[yAxis - 1][xAxis] === undefined) ? currentLocation : world[yAxis - 1][xAxis];
     }
     if (direction === 'west') {
         return xAxis === 0 ? currentLocation : world[yAxis][xAxis - 1];
     }
     if (direction === 'east') {
-        return xAxis >= world.length - 1 ? currentLocation : world[yAxis][xAxis + 1];
+        return xAxis >= world[yAxis].length - 1 ? currentLocation : world[yAxis][xAxis + 1];
     }
     if (direction === 'south') {
         return yAxis >= world.length - 1 ? currentLocation : world[yAxis + 1][xAxis];

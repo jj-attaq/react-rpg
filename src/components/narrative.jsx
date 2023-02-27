@@ -16,7 +16,9 @@ const secondRoom = makeRoom('A dark room with an eerie green glow to what you be
 export const world = [
     [{description: 'room 1'}, {description: 'room 2'}, {description: 'room 3'}],
     [{description: 'room 4'}, {description: 'room 5'}, {description: 'room 6'}],
-    [{description: 'room 7'}, {description: 'room 8'}, {description: 'room 9'}]
+    [{description: 'room 7'}, {description: 'room 8'}, {description: 'room 9'}],
+    [{description: 'room 10'}, {description: 'room 11'}, {description: 'room 12'}],
+    [{description: 'room 13'}, {description: 'room 14'}, {description: 'room 15'}, {description: 'test room'}]
 ];
 
 export const hero = {
