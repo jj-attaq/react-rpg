@@ -21,10 +21,11 @@ export default function GameWindow() {
             <Narrative text={currentText}/>
             <div className="window dashboard">
                 <Navigation setText={setText} currentLocation={currentLocation} setLocation={setLocation} />
-                <Interaction setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
-                <Combat setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
+                <Interaction currentText={currentText} setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
+                <Combat currentText={currentText} setText={setText} currentLocation={currentLocation} setLocation={setLocation}/>
             </div>
-            </div>
+            <GameMap />
+        </div>
     );
 }
 export function Narrative({text}) {
@@ -105,5 +106,26 @@ function Combat({setText}) {
         <div className={"combat"}>
             <Button value={"Attack"} type={"btn"} onBtnClick={() => setText("You attack!")}/>
         </div>
+    );
+}
+function GameMap() {
+
+    function drawMap() {
+        const gameMap = [];
+        for (let i = 0; i < world.length; i++) {
+            for (let j = 0; j < world[i].length; j++) {
+                gameMap.push(world[i][j].description)
+            }
+        }
+        return gameMap.map(room => (
+            <div className={"bg-blue-400 h-8 w-8"} key={"room" + `${gameMap.indexOf(room) + 1}`}>{}</div>
+        ));
+    }
+    return (
+        <>
+        <div className={"grid grid-cols-4 grid-rows-5"}>
+        {drawMap()}
+        </div>
+        </>
     );
 }
